@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>The Adult Safety Check — SafeLife by The Snag Tag</title>
+<meta name="description" content="7 real checks for your exact life stage — 19-29, 30-44 or 45-64. Free, 5 minutes, no signup — from The Snag Tag.">
+<style>
+:root{
+  --accent:#4F46E5; --accent-dark:#4338CA; --accent-rgb:79,70,229;
+}
+body[data-mode="light"], body{
+  --bg:#F9F6F0; --surface:#FFFFFF; --surface-2:#EDE6D6; --tile:#F9F6F0;
+  --ink:#0D1B2A; --ink-mid:#3A4A5C; --ink-soft:#6B7A8D; --line:#E4DBC8;
+  --navy:#0D1B2A; --navy-2:#132335;
+  --safe:#15803D; --safe-bg:#E7F5EC;
+  --flag:#B45309; --flag-bg:#FDF1DF;
+}
+body[data-mode="dark"]{
+  --bg:#0B1420; --surface:#13202F; --surface-2:#1C2C3E; --tile:#0F1A28;
+  --ink:#EDF2F7; --ink-mid:#B7C4D1; --ink-soft:#8194A7; --line:#243549;
+  --navy:#0D1B2A; --navy-2:#0A1622;
+  --safe:#4ADE80; --safe-bg:#122A1C;
+  --flag:#FBBF6B; --flag-bg:#2E2311;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  transition:background .25s,color .25s;
+}
+h1,h2,h3,h4{font-family:'Sora',Inter,sans-serif; margin:0}
+::selection{background:rgba(var(--accent-rgb),.35)}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+.topbar{
+  background:linear-gradient(135deg,var(--navy),var(--navy-2)); color:#fff;
+  padding:12px 18px; display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:20; box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+.topbar-left{display:flex; align-items:center; gap:10px}
+.topbar-logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));display:flex;align-items:center;justify-content:center;flex:none}
+.topbar-logo svg{width:18px;height:18px;stroke:#0D1B2A}
+.topbar-name{font-weight:700; font-size:16px; letter-spacing:-.2px}
+.topbar-name span{color:var(--accent)}
+.topbar-sub{font-size:11px; color:rgba(255,255,255,.6); font-weight:500}
+.topbar-tools{display:flex; gap:6px}
+.tool-btn{background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.16); color:#fff; border-radius:8px; padding:7px 10px; font-size:13px; cursor:pointer; font-weight:600; display:flex; align-items:center; gap:5px}
+.tool-btn:hover{background:rgba(255,255,255,.17)}
+
+.progress-wrap{position:sticky; top:56px; z-index:19; background:var(--bg); padding:10px 18px 8px; border-bottom:1px solid var(--line)}
+.progress-track{height:6px; background:var(--surface-2); border-radius:99px; overflow:hidden; max-width:640px; margin:0 auto}
+.progress-fill{height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-dark)); border-radius:99px; transition:width .35s ease; width:0%}
+.progress-label{max-width:640px; margin:6px auto 0; font-size:12px; color:var(--ink-soft); font-weight:600; display:flex; justify-content:space-between}
+
+main{max-width:640px; margin:0 auto; padding:28px 20px 90px}
+.screen{display:none; animation:fade .35s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+
+.hook-badge{display:inline-flex; align-items:center; gap:6px; background:var(--surface-2); color:var(--flag); font-weight:700; font-size:12.5px; padding:5px 12px; border-radius:99px; margin-bottom:18px}
+.hook h1{font-size:clamp(1.7rem,6vw,2.3rem); line-height:1.15; margin-bottom:14px}
+.hook h1 em{font-style:normal; color:var(--accent-dark)}
+body[data-mode="dark"] .hook h1 em{color:var(--accent)}
+.hook p.lede{font-size:1.05rem; color:var(--ink-mid); margin-bottom:22px}
+.hook-facts{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:26px}
+.hook-fact{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 10px; text-align:center}
+.hook-fact .n{font-family:'Sora',sans-serif; font-size:1.4rem; font-weight:700; color:var(--accent-dark)}
+body[data-mode="dark"] .hook-fact .n{color:var(--accent)}
+.hook-fact .t{font-size:11.5px; color:var(--ink-soft); font-weight:600; margin-top:2px}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  border-radius:12px; padding:15px 22px; font-size:16px; font-weight:700; cursor:pointer;
+  border:none; width:100%; text-align:center;
+}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-dark)); color:#fff; box-shadow:0 4px 14px rgba(var(--accent-rgb),.35)}
+.btn-primary:hover{filter:brightness(1.07)}
+.btn-ghost{background:var(--surface); color:var(--ink); border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent)}
+.btn-sm{padding:10px 16px; font-size:14px; width:auto}
+.hint-row{display:flex; align-items:center; gap:8px; margin-top:14px; font-size:13px; color:var(--ink-soft); justify-content:center}
+
+.choose-card{background:var(--surface); border:1.5px solid var(--line); border-radius:14px; padding:18px 18px; margin-bottom:12px; cursor:pointer; transition:border-color .15s}
+.choose-card:hover{border-color:var(--accent)}
+.choose-card .cc-label{font-family:'Sora',sans-serif; font-size:1.1rem; font-weight:700; margin-bottom:3px}
+.choose-card .cc-range{font-size:13px; color:var(--ink-soft); font-weight:600}
+
+.zone-chip{display:inline-flex; align-items:center; gap:6px; background:var(--surface-2); color:var(--ink-mid); font-weight:700; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; padding:5px 11px; border-radius:99px; margin-bottom:16px}
+.zone-chip .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-dark)}
+body[data-mode="dark"] .zone-chip .dot{background:var(--accent)}
+
+.check-card{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px 22px; box-shadow:0 2px 12px rgba(13,27,42,.06)}
+.check-card .verb{font-size:12.5px; font-weight:700; color:var(--accent-dark); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px}
+body[data-mode="dark"] .check-card .verb{color:var(--accent)}
+.check-card h2{font-size:1.35rem; line-height:1.3; margin-bottom:10px}
+.check-card .prompt{font-size:1rem; color:var(--ink-mid); margin-bottom:20px}
+.check-card .prompt strong{color:var(--ink)}
+.opts{display:flex; flex-direction:column; gap:10px; margin-bottom:4px}
+.opt{
+  display:flex; align-items:center; gap:12px; background:var(--tile); border:1.5px solid var(--line);
+  border-radius:12px; padding:14px 16px; cursor:pointer; font-size:15px; font-weight:600; color:var(--ink);
+  transition:border-color .15s, background .15s;
+}
+.opt:hover{border-color:var(--accent)}
+.opt .ic{width:22px;height:22px;border-radius:50%;border:2px solid var(--line); flex:none; display:flex;align-items:center;justify-content:center; font-size:13px; font-weight:800; color:transparent}
+.opt.selected{border-color:var(--accent-dark)}
+body[data-mode="dark"] .opt.selected{border-color:var(--accent)}
+.opt.selected.safe{background:var(--safe-bg); border-color:var(--safe)}
+.opt.selected.safe .ic{border-color:var(--safe); color:var(--safe)}
+.opt.selected.flag{background:var(--flag-bg); border-color:var(--flag)}
+.opt.selected.flag .ic{border-color:var(--flag); color:var(--flag)}
+.change-hint{font-size:12.5px; color:var(--ink-soft); margin:10px 0 0}
+
+.reveal{margin-top:18px; border-radius:12px; padding:16px 18px; border-left:4px solid var(--accent-dark); background:var(--surface-2); display:none}
+body[data-mode="dark"] .reveal{border-left-color:var(--accent)}
+.reveal.show{display:block; animation:fade .3s ease}
+.reveal .rk{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--accent-dark); margin-bottom:6px}
+body[data-mode="dark"] .reveal .rk{color:var(--accent)}
+.reveal.good{border-left-color:var(--safe); background:var(--safe-bg)}
+.reveal.good .rk{color:var(--safe)}
+.reveal.bad{border-left-color:var(--flag); background:var(--flag-bg)}
+.reveal.bad .rk{color:var(--flag)}
+.reveal p{margin:0 0 8px; font-size:14.5px; color:var(--ink-mid)}
+.reveal p:last-child{margin-bottom:0}
+.reveal .src{font-size:12.5px; color:var(--ink-soft); font-style:italic}
+
+.nav-row{display:flex; gap:10px; margin-top:22px}
+.nav-row .btn{flex:1}
+.nav-back{background:transparent; color:var(--ink-soft); border:none; font-size:13px; font-weight:600; cursor:pointer; padding:8px; margin-top:10px; width:100%; text-align:center}
+
+.result-head{text-align:center; margin-bottom:24px}
+.result-head .kicker{font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft)}
+.result-head h1{font-size:1.8rem; margin:8px 0 4px}
+.result-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:22px 0 26px}
+.rstat{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 8px; text-align:center}
+.rstat .n{font-family:'Sora',sans-serif; font-size:1.9rem; font-weight:700}
+.rstat.total .n{color:var(--ink)}
+.rstat.safe .n{color:var(--safe)}
+.rstat.flag .n{color:var(--flag)}
+.rstat .t{font-size:11.5px; color:var(--ink-soft); font-weight:600; margin-top:2px}
+
+.zone-bars{display:flex; flex-direction:column; gap:10px; margin-bottom:26px}
+.zbar-row{display:flex; align-items:center; gap:10px}
+.zbar-label{width:132px; flex:none; font-size:12.5px; font-weight:600; color:var(--ink-mid); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.zbar-track{flex:1; height:9px; background:var(--surface-2); border-radius:99px; overflow:hidden}
+.zbar-fill{height:100%; border-radius:99px; background:var(--safe)}
+.zbar-fill.partial{background:var(--flag)}
+.zbar-count{width:38px; flex:none; text-align:right; font-size:12.5px; font-weight:700; color:var(--ink-soft)}
+
+.section-h{font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); margin:26px 0 12px}
+.finding{display:flex; gap:12px; padding:13px 0; border-bottom:1px solid var(--line)}
+.finding:last-child{border-bottom:none}
+.finding .fic{width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.finding.flag .fic{background:var(--flag-bg); color:var(--flag)}
+.finding.safe .fic{background:var(--safe-bg); color:var(--safe)}
+.finding .ft{font-weight:700; font-size:14.5px; margin-bottom:2px}
+.finding .fd{font-size:13.5px; color:var(--ink-soft); line-height:1.5}
+
+.quickwin{background:var(--surface); border:1.5px solid var(--accent-dark); border-radius:16px; padding:20px; margin:8px 0 26px}
+body[data-mode="dark"] .quickwin{border-color:var(--accent)}
+.quickwin .qk{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--accent-dark); margin-bottom:8px}
+body[data-mode="dark"] .quickwin .qk{color:var(--accent)}
+.quickwin h3{font-size:1.1rem; margin-bottom:8px}
+.quickwin p{font-size:14.5px; color:var(--ink-mid); margin:0}
+
+.bridge{background:linear-gradient(160deg,var(--navy),var(--navy-2)); color:#fff; border-radius:18px; padding:26px 22px; margin:10px 0 20px}
+.bridge .bk{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--accent)}
+.bridge h3{font-size:1.4rem; margin:8px 0 12px; line-height:1.3}
+.bridge p{font-size:14.5px; color:rgba(255,255,255,.82); margin:0 0 14px}
+.bridge .still{background:rgba(255,255,255,.07); border-radius:12px; padding:14px 16px; margin:14px 0}
+.bridge .still h4{font-size:12.5px; text-transform:uppercase; letter-spacing:.04em; color:rgba(255,255,255,.55); margin-bottom:8px}
+.bridge .still ul{margin:0; padding-left:18px; font-size:13.5px; color:rgba(255,255,255,.85)}
+.bridge .still li{margin-bottom:5px}
+.bridge .btn-primary{margin-top:6px}
+.bridge .note{font-size:11.5px; color:rgba(255,255,255,.45); margin-top:10px; text-align:center}
+
+.restart-row{text-align:center; margin-top:8px}
+.restart-row button{background:none; border:none; color:var(--ink-soft); font-size:13px; font-weight:600; text-decoration:underline; cursor:pointer}
+
+.disclaimer{font-size:12px; color:var(--ink-soft); text-align:center; margin-top:30px; padding-top:18px; border-top:1px solid var(--line); line-height:1.6}
+</style>
+</head>
+<body data-mode="light">
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="topbar-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.2"/><path d="M6.8 20.5v-3.2a5.2 5.2 0 0 1 10.4 0v3.2"/></svg></span>
+    <div>
+      <div class="topbar-name">Safe<span>Life</span></div>
+      <div class="topbar-sub">by The Snag Tag &middot; Adult Safety Check</div>
+    </div>
+  </div>
+  <div class="topbar-tools">
+    <button class="tool-btn" id="modeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+  </div>
+</div>
+
+<div class="progress-wrap" id="progressWrap" style="display:none">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label"><span id="progressText">Check 1</span><span id="progressPct">0%</span></div>
+</div>
+
+<main>
+
+  <section class="screen active" id="screen-hook">
+    <div class="hook">
+      <span class="hook-badge">🏠 For adults 19&ndash;64</span>
+      <h1>Seven questions.<br>Are the basics actually <em>covered?</em></h1>
+      <p class="lede">Real checks, pulled from The Snag Tag's own SafeLife Young Adult, Adult and Middle-Aged Adult systems. No signup, no fear-mongering &mdash; just a fast, honest look at today.</p>
+      <div class="hook-facts">
+        <div class="hook-fact"><div class="n">7</div><div class="t">real checks</div></div>
+        <div class="hook-fact"><div class="n">~5</div><div class="t">minutes</div></div>
+        <div class="hook-fact"><div class="n">£0</div><div class="t">to start</div></div>
+      </div>
+      <button class="btn btn-primary" id="startBtn" type="button">Start the Check &rarr;</button>
+      <div class="hint-row">Free. No account. Your answers stay on this device.</div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-choose">
+    <div class="hook">
+      <h1 style="font-size:1.6rem">Which stage fits you right now?</h1>
+      <p class="lede" style="margin-bottom:20px">This decides which real checks you'll see today — pick the one that fits.</p>
+      <div class="choose-card" data-key="youngadult"><div class="cc-label">Young Adult</div><div class="cc-range">19 to 29 years</div></div>
+      <div class="choose-card" data-key="adult"><div class="cc-label">Adult</div><div class="cc-range">30 to 44 years</div></div>
+      <div class="choose-card" data-key="middleaged"><div class="cc-label">Middle-Aged Adult</div><div class="cc-range">45 to 64 years</div></div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-check">
+    <span class="zone-chip"><span class="dot"></span><span id="chkZone">Zone</span></span>
+    <div class="check-card">
+      <div class="verb" id="chkVerb">Check</div>
+      <h2 id="chkTitle"></h2>
+      <p class="prompt" id="chkPrompt"></p>
+      <div class="opts" id="chkOpts"></div>
+      <p class="change-hint">Pick either one &mdash; you can change your answer any time before you move on.</p>
+      <div class="reveal" id="chkReveal">
+        <div class="rk" id="revealKicker">Here's what actually matters</div>
+        <p id="revealWhy"></p>
+        <p id="revealHow"></p>
+        <p class="src" id="revealSrc"></p>
+      </div>
+      <div class="nav-row" id="chkNavRow" style="display:none">
+        <button class="btn btn-primary" id="chkNextBtn" type="button">Next check &rarr;</button>
+      </div>
+    </div>
+    <button class="nav-back" id="chkBackBtn" type="button">&larr; back</button>
+  </section>
+
+  <section class="screen" id="screen-result">
+    <div class="result-head">
+      <div class="kicker">Your Adult Safety Check</div>
+      <h1 id="resultHeadline">Here's what you found</h1>
+    </div>
+
+    <div class="result-stats">
+      <div class="rstat total"><div class="n" id="statTotal">0</div><div class="t">checked today</div></div>
+      <div class="rstat safe"><div class="n" id="statSafe">0</div><div class="t">already sorted</div></div>
+      <div class="rstat flag"><div class="n" id="statFlag">0</div><div class="t">need attention</div></div>
+    </div>
+
+    <div class="zone-bars" id="zoneBars"></div>
+
+    <div class="section-h">What to check today</div>
+    <div id="findingsFlag"></div>
+
+    <div class="section-h">Already sorted</div>
+    <div id="findingsSafe"></div>
+
+    <div class="quickwin" id="quickwin">
+      <div class="qk">&#9889; Quick win &mdash; do this now, free</div>
+      <h3 id="qwTitle"></h3>
+      <p id="qwBody"></p>
+    </div>
+
+    <div class="bridge">
+      <div class="bk">The complete system</div>
+      <h3 id="bridgeHeadline">You found the gaps. Here's what closes them.</h3>
+      <p id="bridgeBody"></p>
+      <div class="still" id="bridgeStill">
+        <h4>Today's check opened part of the picture. Here's what's still closed:</h4>
+        <ul id="bridgeStillList"></ul>
+      </div>
+      <a class="btn btn-primary" id="proBtn" href="#" target="_blank" rel="noopener">Get the complete PRO system &rarr;</a>
+      <div class="note">One-time purchase. Works offline, on any device, no subscription.</div>
+      <button class="btn btn-ghost" id="saveResultsBtn" type="button" style="margin-top:12px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#fff">Not ready yet? Save my results instead &rarr;</button>
+      <div class="note">Downloads a copy of exactly what you found today, free, no email needed. Nothing here disappears &mdash; but nothing reminds you either, so keep it somewhere you'll see it.</div>
+    </div>
+
+    <div class="restart-row"><button id="restartBtn" type="button">&#8634; Start the check again</button></div>
+
+    <div class="disclaimer">This is educational general safety guidance from The Snag Tag, a NEBOSH &amp; OSHA trained HSE professional &mdash; not medical advice. Always use your own judgement and consult a doctor, financial or legal professional for concerns specific to your situation.</div>
+  </section>
+
+</main>
+
+<script>
+const PRODUCTS = {
+  "youngadult": {
+    "label": "Young Adult",
+    "ageRange": "19 to 29 years",
+    "accent": "#4F46E5",
+    "accentDark": "#4338CA",
+    "heroTitle": "Young Adult Safety — 19 to 29 Years",
+    "gumroadUrl": "https://snagtag.gumroad.com/l/YoungAdult_PRO",
+    "checks": [
+      {
+        "zone": "Independent Living & First Home",
+        "verb": "Fit & Test",
+        "title": "Do you have a working CO alarm near every fuel-burning appliance?",
+        "prompt": "If you have a gas boiler, gas heater, wood burner, or attached garage, <strong>carbon monoxide can build up without any warning sign</strong>.",
+        "yes": "Yes, fitted & tested",
+        "no": "Not yet",
+        "why": "Carbon monoxide is colourless, odourless and can be fatal within hours; a faulty or poorly ventilated appliance can leak it without any obvious sign, and a CO alarm is the only reliable early warning available in an ordinary home.",
+        "how": "Fit an audible CO alarm certified to EN 50291 in any room with a fuel-burning appliance and near sleeping areas. Test it monthly alongside your smoke alarms, and have any gas appliance serviced by a qualified technician if the alarm ever sounds, if a pilot light burns orange/yellow instead of blue, or if you notice soot marks or condensation around an appliance.",
+        "standard": "One CO alarm per room with a fuel-burning appliance (EN 50291); test monthly; replace per manufacturer date (typically 5–10 years); annual professional appliance service recommended.",
+        "tip": "A CO alarm costs about the same as one night out — fit one the same week as your smoke alarms, not \"when you get around to it\".",
+        "src": "Source: SafeLife Young Adult PRO, YA02 — Carbon Monoxide Alarm Near Fuel-Burning Appliances"
+      },
+      {
+        "zone": "Money, Work & Digital Safety",
+        "verb": "Lock Down Accounts",
+        "title": "Is your email protected with a unique password and 2FA?",
+        "prompt": "<strong>Email is the recovery key</strong> to almost every other account you own — a breach there can unlock everything else.",
+        "yes": "Yes, unique password + 2FA",
+        "no": "Not yet",
+        "why": "Email is the recovery key to almost every other account; a single reused, weak password discovered in one data breach can unlock a person's entire digital and financial life if the same password is used elsewhere.",
+        "how": "Use a unique password for every account — a password manager makes this realistic. Turn on two-factor authentication (2FA) for email and banking as a minimum, preferring an authenticator app or hardware key over text messages where offered. Never share a one-time passcode with anyone, including someone claiming to be from your bank.",
+        "standard": "Unique password per account (12+ characters or a 3-word passphrase); 2FA enabled on email and banking at minimum; one-time codes never shared with anyone.",
+        "tip": "Secure your email account first and best — anyone who controls your email can reset almost everything else you own online.",
+        "src": "Source: SafeLife Young Adult PRO, YA17 — Safe Password & Multi-Factor Authentication Habits"
+      },
+      {
+        "zone": "Mental Health & Life Transitions",
+        "verb": "Know the Signs",
+        "title": "Would you recognise the most serious warning signs in yourself or a friend?",
+        "prompt": "Signs like hopeless language, giving away possessions, or a final-feeling goodbye mean <strong>act today, not wait and see</strong>.",
+        "yes": "Yes, I know the signs",
+        "no": "Not sure",
+        "why": "These specific signs are recognised across professional guidance as signals that someone may be at risk and needs immediate support — they are more serious than ordinary low mood and call for prompt, direct action rather than a wait-and-see approach, whether you notice them in yourself or in someone else.",
+        "how": "Take any one of these signs seriously on its own — do not wait for several before acting. If it is you: tell someone today and contact a GP, an out-of-hours health service, or a crisis line saved in your personalised cheat sheet. If it is a friend: stay with them, stay calm, and help them access same-day professional support rather than leaving them to manage alone.",
+        "standard": "Any single instance of hopeless/burden language, giving away possessions, or a final-feeling goodbye — in yourself or a friend — is treated as needing same-day professional contact, never waiting for a \"worse\" sign to act.",
+        "tip": "Trust the pattern over the calm — a sudden lift in mood after a period of real distress can reflect relief at a decision made, not genuine recovery, and deserves the same urgent response.",
+        "src": "Source: SafeLife Young Adult PRO, YA35 — Recognising the Most Serious Warning Signs in Yourself or a Friend"
+      },
+      {
+        "zone": "Relationships, Consent & Sexual Health",
+        "verb": "Recognise Abuse",
+        "title": "Could you recognise the warning signs of physical or sexual abuse?",
+        "prompt": "Abuse is <strong>never the fault</strong> of the person experiencing it — recognising the pattern is the first step toward safety.",
+        "yes": "Yes, I know the signs",
+        "no": "Not sure",
+        "why": "Physical or sexual abuse within a relationship is never the fault of the person experiencing it, regardless of relationship history, and recognising the pattern — rather than minimising, excusing, or waiting for it to stop on its own — is the first step toward safety.",
+        "how": "Recognise that any physical harm, forced or pressured sexual activity, or threats of harm within a relationship are abuse, regardless of how the relationship began or what came before. If this is happening to you or someone you know, safety and support come first: see the safety-planning check in this zone, and contact a confidential domestic abuse support service or the emergency services if there is immediate danger.",
+        "standard": "Any instance of physical harm, forced or pressured sexual activity, or a credible threat within a relationship recognised as abuse and acted on — via a safety plan, a trusted person, or professional support — rather than minimised or hidden.",
+        "tip": "If you are ever unsure whether what is happening counts as abuse, that uncertainty alone is worth a confidential conversation with a professional support service — you do not need to be certain to ask for help.",
+        "src": "Source: SafeLife Young Adult PRO, YA48 — Recognising Physical or Sexual Abuse Warning Signs"
+      },
+      {
+        "zone": "Nightlife, Substances & Risk",
+        "verb": "Protect Your Drink",
+        "title": "Do you keep your drink in sight every time you're out?",
+        "prompt": "A drink left unattended for even a few minutes is <strong>exactly the window in which spiking most often happens</strong>.",
+        "yes": "Yes, always",
+        "no": "Not always",
+        "why": "Drink spiking can happen quickly and without the person noticing at the time, and the resulting incapacitation puts someone at serious risk of harm — awareness and simple precautions meaningfully reduce this risk.",
+        "how": "Keep your drink with you at all times, or use a drink cover where available. Never accept a drink you did not see poured or opened, including from someone you know casually. Watch out for friends and encourage the same habits in a group, and treat sudden, unexplained intoxication as something to act on immediately, not wait out.",
+        "standard": "Drinks kept in sight or covered at all times; drinks only accepted from a sealed container opened in view, or watched being poured; sudden unexplained changes in a friend's condition treated as needing immediate attention.",
+        "tip": "Agree a simple group rule before a night out: drinks never left unattended, and any drink that \"tastes odd\" is left undrunk, no exceptions.",
+        "src": "Source: SafeLife Young Adult PRO, YA59 — Drink Spiking Awareness & Prevention"
+      },
+      {
+        "zone": "Nightlife, Substances & Risk",
+        "verb": "Act Fast",
+        "title": "Would you call for help immediately in a substance-related emergency?",
+        "prompt": "Fear of consequences is the most common reason people <strong>delay calling for help</strong> — speed is what matters most.",
+        "yes": "Yes, call first, always",
+        "no": "Not sure",
+        "why": "Fear of consequences for themselves or a friend is one of the most common reasons people delay calling for emergency help in these situations — but a genuine substance-related emergency is a medical situation where speed of response is what matters most, and it always takes priority over any other concern.",
+        "how": "Recognise the warning signs and call emergency services immediately — do not wait to see if the person improves. Stay with them, turn them onto their side (the recovery position) if they are vomiting or cannot sit up and are not fully alert, and give responders accurate information about what was taken, if known. Never leave someone in this state alone to \"sleep it off.\"",
+        "standard": "Any sign of unresponsiveness, inability to wake, seizure or breathing difficulty triggers an immediate emergency call, with no delay for any other reason; recovery position used for anyone unconscious but breathing.",
+        "tip": "Decide in advance, before you are ever in this situation, that you will always call for help first and answer questions about consequences later.",
+        "src": "Source: SafeLife Young Adult PRO, YA64 — Recognising a Substance-Related Medical Emergency & Acting Fast"
+      },
+      {
+        "zone": "Health, Fitness & Preventive Care",
+        "verb": "Get Trained",
+        "title": "Have you taken a basic first aid course covering choking and CPR?",
+        "prompt": "Living independently means <strong>you may be the only person present</strong> when it matters most.",
+        "yes": "Yes, trained",
+        "no": "Not yet",
+        "why": "Basic first aid, especially recognising and responding to choking and cardiac arrest, measurably improves outcomes before emergency services arrive, and independent adult life means you may be the only person present when it matters.",
+        "how": "Take a basic first aid course covering choking response, CPR and use of a defibrillator if available — many are available cheaply or free and take only a few hours. Keep a basic first aid kit at home, and know that for choking, alternating back blows and abdominal thrusts is the internationally recognised approach; for cardiac arrest, calling emergency services immediately and starting chest compressions following ILCOR-aligned guidance measurably improves survival.",
+        "standard": "A basic first aid course completed at least once as an independent adult; a stocked first aid kit at home; choking and CPR response know-how refreshed periodically (ILCOR-aligned guidance).",
+        "tip": "Book a half-day first aid course in your first year of independent living — it is a few hours that could matter more than almost anything else you learn that year.",
+        "src": "Source: SafeLife Young Adult PRO, YA78 — Basic First Aid Everyone Living Independently Should Know"
+      }
+    ]
+  },
+  "adult": {
+    "label": "Adult",
+    "ageRange": "30 to 44 years",
+    "accent": "#16A34A",
+    "accentDark": "#15803D",
+    "heroTitle": "Adult Safety — 30 to 44 Years",
+    "gumroadUrl": "https://snagtag.gumroad.com/l/Adult_PRO",
+    "checks": [
+      {
+        "zone": "Home Ownership & Household Safety",
+        "verb": "Fit & Service",
+        "title": "Is your CO alarm fitted, tested, and your boiler serviced yearly?",
+        "prompt": "A blocked flue or unserviced appliance can leak carbon monoxide <strong>steadily overnight with no obvious warning</strong>.",
+        "yes": "Yes, alarm + annual service",
+        "no": "Not yet",
+        "why": "Carbon monoxide is colourless and odourless, and a blocked flue or poorly serviced appliance can leak it steadily overnight without any obvious warning sign other than the alarm itself.",
+        "how": "Fit an audible CO alarm certified to EN 50291 in any room with a fuel-burning appliance, test it monthly, and arrange annual servicing of boilers and other fuel-burning appliances by a qualified technician. Treat a yellow or orange (instead of blue) pilot flame, soot marks, or increased condensation as signs an appliance needs checking urgently.",
+        "standard": "One CO alarm per room with a fuel-burning appliance (EN 50291); test monthly; annual professional appliance servicing; alarm unit replaced per manufacturer date, typically 5–10 years.",
+        "tip": "Book your annual boiler service on the same weekend every year so it never quietly slips a year.",
+        "src": "Source: SafeLife Adult PRO, AD06 — Carbon Monoxide Alarm Near Fuel-Burning Appliances"
+      },
+      {
+        "zone": "Family, Parenting & Caregiving",
+        "verb": "Lock It Up",
+        "title": "Are all medications in your home locked away from children?",
+        "prompt": "A visiting relative's bag left within reach is a <strong>frequently overlooked</strong> route to accidental poisoning.",
+        "yes": "Yes, locked or out of reach",
+        "no": "Not yet",
+        "why": "Accidental medication ingestion is one of the most common causes of childhood poisoning emergencies, and a resident child is not the only risk — a visiting relative's medication left in an accessible bag is a frequently overlooked route of exposure.",
+        "how": "Store all medications in a locked cabinet or high, out-of-reach location, use child-resistant packaging (ISO 8317) as a second layer of protection rather than the only safeguard, and ask visiting relatives to keep medication in a bag that stays out of a child's reach for the visit.",
+        "standard": "Medications stored locked or out of reach at all times a child is in the home; child-resistant packaging used (ISO 8317) in addition to, not instead of, secure storage; visiting relatives' medication bags kept inaccessible to children.",
+        "tip": "Child-resistant packaging slows a determined toddler down — it does not stop one. Locked and out of reach is the real safeguard.",
+        "src": "Source: SafeLife Adult PRO, AD23 — Safe Storage of Medications Away from Children"
+      },
+      {
+        "zone": "Workplace & Career Safety",
+        "verb": "Check In",
+        "title": "Would you recognise the warning signs of work-related stress in yourself?",
+        "prompt": "Chronic work stress is often <strong>dismissed as \"just how this job is\"</strong> until it affects health.",
+        "yes": "Yes, I'd know the signs",
+        "no": "Not sure",
+        "why": "Chronic work-related stress affects both mental and physical health over time, and it is commonly normalised as \"just how this job is,\" which delays the point at which people recognise it and take action.",
+        "how": "Watch for warning signs such as persistent difficulty concentrating, irritability, disrupted sleep, dreading the workday, or physical symptoms like headaches and muscle tension. Raise concerns with a manager, occupational health service, or your workplace's employee-assistance programme, and speak to your doctor if symptoms persist.",
+        "standard": "Warning signs present most days for 2+ weeks warrant raising the issue formally rather than continuing to absorb it silently; workplace psychosocial risk addressed with the same seriousness as physical safety risk (ISO 45003-aligned).",
+        "tip": "Stress that has become the constant background of your week, not just a rough patch, deserves the same seriousness as a physical safety concern.",
+        "src": "Source: SafeLife Adult PRO, AD38 — Recognising the Warning Signs of Work-Related Stress"
+      },
+      {
+        "zone": "Midlife Health & Preventive Care",
+        "verb": "Know the Signs",
+        "title": "Would you recognise a heart attack even without the \"dramatic\" symptoms?",
+        "prompt": "Symptoms — especially in women — <strong>don't always match the dramatic image</strong> most people expect.",
+        "yes": "Yes, I know the signs",
+        "no": "Not sure",
+        "why": "Heart attacks are time-critical, and the outcome depends heavily on how quickly emergency treatment begins; symptoms in this age band, and particularly in women, do not always match the dramatic image most people expect, which is part of why they are so often missed or delayed.",
+        "how": "Learn the wider range of symptoms — chest pain, pressure or tightness, pain spreading to the arm, jaw, neck or back, shortness of breath, nausea, cold sweat, or unusual fatigue — and treat any combination of these as an emergency requiring immediate professional help, rather than waiting to see if it passes.",
+        "standard": "Emergency help sought immediately for chest pain/pressure lasting more than a few minutes or accompanied by other warning signs; no waiting to \"see if it passes\" before acting.",
+        "tip": "If in doubt, act as though it is serious — the cost of an unnecessary emergency call is always smaller than the cost of a delayed one.",
+        "src": "Source: SafeLife Adult PRO, AD46 — Recognising the Warning Signs of a Heart Attack"
+      },
+      {
+        "zone": "Midlife Health & Preventive Care",
+        "verb": "Run the FAST Check",
+        "title": "Do you know the FAST check for stroke — Face, Arms, Speech, Time?",
+        "prompt": "Stroke treatment is <strong>highly time-dependent</strong> — recognising it immediately changes outcomes.",
+        "yes": "Yes, I know FAST",
+        "no": "Not sure",
+        "why": "Stroke treatment effectiveness is highly time-dependent — outcomes are meaningfully better the sooner treatment begins — which is exactly why recognising the signs immediately, rather than waiting to see if they pass, changes outcomes.",
+        "how": "Use the FAST check: Face — has one side dropped? Arms — can both be raised and held up? Speech — is it slurred or strange? Time — if any of these are present, seek emergency help immediately and note the time symptoms started, as it affects treatment options.",
+        "standard": "Emergency help sought immediately for any FAST sign; time of symptom onset noted and reported, as it directly affects available treatment.",
+        "tip": "Practise the FAST check with your family so everyone in the household would recognise it instantly, not just in theory.",
+        "src": "Source: SafeLife Adult PRO, AD47 — Recognising the Warning Signs of a Stroke"
+      },
+      {
+        "zone": "Financial Security & Life Planning",
+        "verb": "Update Your Will",
+        "title": "Is your will in place and updated since your last major life change?",
+        "prompt": "Without a current will, decisions about your estate — even <strong>guardianship of your children</strong> — may be made by default rules, not your wishes.",
+        "yes": "Yes, current",
+        "no": "Not yet or outdated",
+        "why": "Without a valid, current will, decisions about your estate and, in some regions, guardianship of dependent children may be decided by default rules rather than your actual wishes, which can create unnecessary hardship and conflict for the people you leave behind at an already difficult time.",
+        "how": "Have a legally valid will drawn up with the help of a qualified professional if you do not already have one, name a guardian for any dependent children, and review and update it after any major life change — marriage, a new child, separation, or a significant change in assets.",
+        "standard": "Will reviewed at least every 3–5 years or immediately after any major life change; a professional consulted to ensure the will is legally valid in your jurisdiction.",
+        "tip": "Put \"review my will\" on the same recurring reminder as another major annual task — it is easy to keep postponing indefinitely otherwise.",
+        "src": "Source: SafeLife Adult PRO, AD61 — Having a Will in Place and Keeping It Current"
+      },
+      {
+        "zone": "Relationships & Emergency Preparedness",
+        "verb": "Recognise the Pattern",
+        "title": "Could you recognise controlling or abusive behaviour in a relationship?",
+        "prompt": "These patterns typically <strong>escalate gradually</strong> rather than beginning dramatically.",
+        "yes": "Yes, I know the signs",
+        "no": "Not sure",
+        "why": "Controlling and abusive relationship patterns typically escalate gradually rather than beginning dramatically, which is exactly why they are so often minimised or explained away in the early stages — recognising the pattern, not just a single incident, is what allows someone to seek help and safety in time.",
+        "how": "Learn the recognised warning signs — being isolated from friends or family, having your finances or communications controlled, constant criticism or intimidation, and never quite knowing which version of your partner you will get. If you recognise this pattern in your own relationship or someone else's, reach out to a confidential domestic-abuse support line or a trusted professional — save the number in your cheat sheet in advance, and know that a safety plan can be built with a support service without committing to any immediate decision.",
+        "standard": "A confidential domestic-abuse support line saved in your cheat sheet in advance; any recognised pattern of control or intimidation treated as worth a confidential conversation with a support service, not something to manage alone.",
+        "tip": "Save a confidential domestic-abuse support-line number in your cheat sheet today, for yourself or to be ready to offer someone else — reaching out for information is not a commitment to any particular next step.",
+        "src": "Source: SafeLife Adult PRO, AD74 — Recognising Controlling or Abusive Relationship Behaviour and Knowing Where to Get Help"
+      }
+    ]
+  },
+  "middleaged": {
+    "label": "Middle-Aged Adult",
+    "ageRange": "45 to 64 years",
+    "accent": "#475569",
+    "accentDark": "#1E293B",
+    "heroTitle": "Middle-Aged Adult Safety — 45 to 64 Years",
+    "gumroadUrl": "https://snagtag.gumroad.com/l/MiddleAgedAdult_PRO",
+    "checks": [
+      {
+        "zone": "Home Safety & Ageing-in-Place",
+        "verb": "Re-Walk the Plan",
+        "title": "Does your fire escape plan account for slower movement or reduced mobility?",
+        "prompt": "A plan that only works for your <strong>fastest mover is not a real plan</strong>.",
+        "yes": "Yes, reassessed",
+        "no": "Not yet",
+        "why": "Fire evacuation plans are often designed once, early in a household's life, and never revisited — but an escape plan that assumes everyone can move quickly down a full flight of stairs in the dark is not a safe plan for a household where that is no longer reliably true.",
+        "how": "Test smoke alarms monthly, fit a carbon monoxide alarm near fuel-burning appliances, and specifically re-walk your escape plan considering slower movement, a ground-floor sleeping option if stairs are a barrier, and a bedroom door that is realistically usable in the dark. Update the plan after any change in a household member's mobility.",
+        "standard": "Smoke alarms tested monthly, units replaced at least every 10 years (EN 14604); CO alarm fitted near every fuel-burning appliance (EN 50291); escape plan re-walked and timed at least yearly, accounting for the slowest mover in the household.",
+        "tip": "Time your escape plan honestly, at the pace of your slowest household member — a plan that only works for your fastest mover is not a real plan.",
+        "src": "Source: SafeLife Middle-Aged Adult PRO, MA08 — Fire Safety and Evacuation Planning for Reduced Mobility"
+      },
+      {
+        "zone": "Home Safety & Ageing-in-Place",
+        "verb": "Fit a Grab Rail",
+        "title": "Does your bathroom have grab rails fitted before they're urgently needed?",
+        "prompt": "A rail installed calmly ahead of need is <strong>far safer than an emergency retrofit</strong> after a fall.",
+        "yes": "Yes, fitted",
+        "no": "Not yet",
+        "why": "Bathrooms are the site of a disproportionate share of home falls because wet, hard surfaces combine with the exact movements — stepping over a tub edge, turning in a small space — that become harder as balance and joint mobility change. Planning a modification calmly, before it is urgently needed, is safer and far less disruptive than an emergency retrofit after an injury.",
+        "how": "Fit grab rails near the toilet, bath and shower on securely anchored fixings, add a non-slip mat or strips to the tub and shower floor, and consider a walk-in shower or transfer bench if a full renovation is realistic in the next few years. Discuss timing with an occupational therapist or home-safety assessor if a parent's needs are more immediate than your own.",
+        "standard": "Grab rails fitted to wall studs or specified anchors, rated for a person's full body weight, not just towel bars; non-slip surface fitted to every tub and shower floor; walk-in shower or bath-modification budget reviewed as part of any bathroom renovation from this age onward.",
+        "tip": "Fit at least one grab rail now, even if it feels early — a rail installed calmly ahead of need costs little and is used naturally, unlike one fitted in a rush after an injury.",
+        "src": "Source: SafeLife Middle-Aged Adult PRO, MA03 — Bathroom Modifications Planned Ahead of Need"
+      },
+      {
+        "zone": "Caring for Ageing Parents & Family",
+        "verb": "Consolidate the List",
+        "title": "Does your parent have one complete medication list shared with every prescriber?",
+        "prompt": "The highest risk is exactly when <strong>no single doctor has the full picture</strong>.",
+        "yes": "Yes, one shared list",
+        "no": "Not yet",
+        "why": "Taking many medications at once becomes more common and more risky with age, and the risk is highest exactly when no single doctor has the complete picture, because each prescriber may only see the medications they themselves have prescribed.",
+        "how": "Keep or help your parent keep one complete, current list of every medication, supplement and dose from every prescriber, and share it at every medical appointment. Ask a doctor or pharmacist for a periodic full medication review specifically to check for interactions and medications that may no longer be needed.",
+        "standard": "A single, complete, current medication list maintained and shared at every appointment; a full medication review with a doctor or pharmacist conducted at least yearly for anyone taking multiple regular medications.",
+        "tip": "Keep the medication list in your parent's bag or wallet, not just at home — it needs to travel with them to every appointment to actually work.",
+        "src": "Source: SafeLife Middle-Aged Adult PRO, MA20 — Reviewing a Parent's Multiple Medications Across Prescribers"
+      },
+      {
+        "zone": "Midlife Health Screening & Chronic Disease Prevention",
+        "verb": "Get Assessed",
+        "title": "Have you had a formal, combined cardiovascular risk-score assessment?",
+        "prompt": "Cardiovascular risk doesn't rise in a straight line through this age band — it <strong>accelerates</strong>.",
+        "yes": "Yes, assessed",
+        "no": "Not yet",
+        "why": "Cardiovascular disease risk does not rise in a straight line — it accelerates through this age band — and a formal combined risk-score assessment gives a far clearer picture of actual risk than looking at blood pressure or cholesterol in isolation, often changing what is worth acting on.",
+        "how": "Ask your doctor for a formal cardiovascular risk-score assessment, which combines blood pressure, cholesterol, age, and other factors into a single risk estimate, rather than only tracking individual numbers. Use the result to guide specific lifestyle or treatment decisions with your doctor.",
+        "standard": "Formal cardiovascular risk-score reassessment conducted at least every 5 years from midlife, more often if risk factors or family history are present; individual risk factors such as blood pressure and cholesterol tracked between formal assessments.",
+        "tip": "Ask specifically for \"my combined cardiovascular risk score,\" not just individual test results — the combined number is what actually guides decisions.",
+        "src": "Source: SafeLife Middle-Aged Adult PRO, MA31 — Formal Cardiovascular Risk Reassessment at Midlife"
+      },
+      {
+        "zone": "Workplace Longevity & Physical Safety",
+        "verb": "Reassess Your Limits",
+        "title": "Have you reassessed your manual handling limits for age-related change?",
+        "prompt": "A load your body recovered from overnight in your 30s can now <strong>strain a joint that takes far longer to heal</strong>.",
+        "yes": "Yes, reassessed",
+        "no": "Not yet",
+        "why": "The technique for safe lifting does not change with age, but the safe margin around it does — a load that was comfortably within your capacity and recovered from overnight in your 30s can strain a joint or disc that takes considerably longer to heal now, even when the lifting technique itself is textbook-correct.",
+        "how": "Reassess your personal manual handling limits periodically rather than assuming they are unchanged, use mechanical aids or ask for assistance with loads you would previously have lifted alone, and raise any workplace task that has become physically harder with your supervisor or occupational health service rather than simply pushing through it.",
+        "standard": "Personal manual handling capacity reassessed at least yearly, not assumed constant over a career; mechanical aids or assistance used for loads previously handled solo when personal capacity has changed (ISO 11228 manual-handling guidance).",
+        "tip": "A longer recovery time after a normal task is information, not weakness — treat it as a signal to adjust the task, not just to push through it and rest more.",
+        "src": "Source: SafeLife Middle-Aged Adult PRO, MA43 — Manual Handling Limits Reassessed for Age-Related Change"
+      },
+      {
+        "zone": "Financial & Estate Planning",
+        "verb": "Update Your Will",
+        "title": "Does your will reflect your current, more complex family situation?",
+        "prompt": "A will written for an earlier family structure can create <strong>confusion and conflict</strong> it never intended.",
+        "yes": "Yes, current",
+        "no": "Not yet or outdated",
+        "why": "Family situations typically become more complex through this stage of life, and a will written decades earlier, or never written at all, may no longer reflect your actual wishes or family structure, creating real risk of unintended outcomes or family conflict if it is not addressed while you are able to address it clearly.",
+        "how": "Write or update your will with a qualified legal professional, explicitly accounting for your current family situation rather than an earlier one, and review it again after any further major family change such as a new grandchild, a remarriage, or a bereavement.",
+        "standard": "A current, legally valid will in place reflecting your actual present family situation, reviewed at least every 3–5 years or after any major family change, not left unchanged for decades.",
+        "tip": "Put a recurring reminder to review your will every few years, the same way you would for any other important document — most out-of-date wills are not neglected on purpose, just never revisited.",
+        "src": "Source: SafeLife Middle-Aged Adult PRO, MA60 — Finalising or Updating a Will for a More Complex Family Situation"
+      },
+      {
+        "zone": "Relationships, Mental Health & Life Transitions",
+        "verb": "Take It Seriously",
+        "title": "Would you take two weeks of low mood or anxiety as seriously as a physical symptom?",
+        "prompt": "Depression and anxiety tied to midlife transitions are <strong>treatable conditions</strong>, not an inevitable part of getting older.",
+        "yes": "Yes, I'd see a doctor",
+        "no": "Not sure I would",
+        "why": "Depression and anxiety at this life stage are sometimes dismissed, by the person experiencing them and by others, as an understandable reaction to a difficult stage of life rather than recognised and treated as a genuine, treatable condition, which delays exactly the support that would help.",
+        "how": "Learn the recognised signs of depression and anxiety — persistent low mood, loss of interest in previously enjoyed activities, excessive worry, sleep and appetite change — and treat them as seriously as you would a physical symptom. Talk to your doctor if these signs persist for two weeks or more, and know that effective treatment options exist.",
+        "standard": "Persistent low mood, anxiety, or loss of interest in usual activities lasting two weeks or more discussed with a doctor promptly, rather than assumed to be a normal, unavoidable part of this life stage.",
+        "tip": "If you would take a two-week physical symptom seriously enough to see a doctor, apply the same standard to two weeks of low mood or anxiety — it deserves the same response.",
+        "src": "Source: SafeLife Middle-Aged Adult PRO, MA75 — Recognising Depression and Anxiety Tied to Midlife Transitions"
+      }
+    ]
+  }
+};
+const BRIDGE_STILL = {
+  "youngadult": [
+    "<strong>Money &amp; Digital Life</strong> beyond passwords — budgeting basics, renting safely and travel safety.",
+    "Plus 77 more checks across all zones — home security, workplace rights, fitness safety and more."
+  ],
+  "adult": [
+    "<strong>Home Ownership</strong> beyond CO alarms — fire safety, DIY hazards and pet-proofing for a growing family.",
+    "Plus 77 more checks across all zones — pregnancy safety, childproofing, career stress and more."
+  ],
+  "middleaged": [
+    "<strong>Caring for Ageing Parents</strong> beyond medication lists — home assessments, care conversations and financial planning together.",
+    "Plus 77 more checks across all zones — perimenopause/andropause health, sandwich-generation stress and more."
+  ]
+};
+const BEHAVIOUR_FIRST = {
+  "youngadult": [
+    1,
+    4,
+    5,
+    6
+  ],
+  "adult": [
+    1,
+    2,
+    5,
+    6
+  ],
+  "middleaged": [
+    1,
+    4,
+    5,
+    6
+  ]
+};
+
+const STORE_KEY = 'snagtag-adult-safety-check';
+let state = { idx:0, answers:[], started:false, product:null };
+let CHECKS = [];
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw){ const s = JSON.parse(raw); if(s && Array.isArray(s.answers)) state = s; }
+  }catch(e){}
+  if(state.product && PRODUCTS[state.product]) CHECKS = PRODUCTS[state.product].checks;
+}
+function saveState(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
+}
+
+function hexToRgbStr(hex){
+  hex = hex.replace('#','');
+  const r = parseInt(hex.substring(0,2),16), g = parseInt(hex.substring(2,4),16), b = parseInt(hex.substring(4,6),16);
+  return r+','+g+','+b;
+}
+function applyProductTheme(key){
+  const p = PRODUCTS[key];
+  document.documentElement.style.setProperty('--accent', p.accent);
+  document.documentElement.style.setProperty('--accent-dark', p.accentDark);
+  document.documentElement.style.setProperty('--accent-rgb', hexToRgbStr(p.accent));
+}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('progressWrap').style.display = (id==='screen-check') ? 'block' : 'none';
+  window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+}
+
+document.querySelectorAll('.choose-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    const key = card.getAttribute('data-key');
+    state = { idx:0, answers:[], started:true, product:key };
+    CHECKS = PRODUCTS[key].checks;
+    applyProductTheme(key);
+    saveState();
+    renderCheck(); show('screen-check');
+  });
+});
+
+function renderCheck(){
+  const i = state.idx;
+  const c = CHECKS[i];
+  document.getElementById('chkZone').textContent = c.zone;
+  document.getElementById('chkVerb').textContent = c.verb;
+  document.getElementById('chkTitle').textContent = c.title;
+  document.getElementById('chkPrompt').innerHTML = c.prompt;
+  document.getElementById('progressText').textContent = 'Check ' + (i+1) + ' of ' + CHECKS.length;
+  document.getElementById('progressPct').textContent = Math.round(((i)/CHECKS.length)*100) + '%';
+  document.getElementById('progressFill').style.width = ((i)/CHECKS.length*100) + '%';
+
+  const opts = document.getElementById('chkOpts');
+  opts.innerHTML = '';
+  const answered = state.answers[i] !== undefined && state.answers[i] !== null;
+
+  [['yes', c.yes, true], ['no', c.no, false]].forEach(([key,label,isSafe])=>{
+    const div = document.createElement('div');
+    div.className = 'opt';
+    const isSelected = answered && state.answers[i] === isSafe;
+    div.innerHTML = '<span class="ic">'+(isSelected ? '\u2713' : '')+'</span><span>'+label+'</span>';
+    if(isSelected) div.classList.add('selected', isSafe ? 'safe':'flag');
+    div.addEventListener('click', ()=>{
+      state.answers[i] = isSafe;
+      saveState();
+      renderCheck();
+      applyReveal(c, isSafe);
+      document.getElementById('chkNavRow').style.display = 'flex';
+      document.getElementById('chkNextBtn').textContent = (i === CHECKS.length-1) ? 'See my results \u2192' : 'Next check \u2192';
+    });
+    opts.appendChild(div);
+  });
+
+  const rv = document.getElementById('chkReveal');
+  if(answered){
+    applyReveal(c, state.answers[i]);
+    document.getElementById('chkNavRow').style.display = 'flex';
+    document.getElementById('chkNextBtn').textContent = (i === CHECKS.length-1) ? 'See my results \u2192' : 'Next check \u2192';
+  } else {
+    rv.classList.remove('show');
+    document.getElementById('chkNavRow').style.display = 'none';
+  }
+  document.getElementById('chkBackBtn').style.visibility = (i===0) ? 'hidden' : 'visible';
+}
+
+function applyReveal(c, isSafe){
+  const rv = document.getElementById('chkReveal');
+  rv.classList.add('show');
+  rv.classList.toggle('good', !!isSafe);
+  rv.classList.toggle('bad', !isSafe);
+  const kicker = document.getElementById('revealKicker');
+  const line1 = document.getElementById('revealWhy');
+  const line2 = document.getElementById('revealHow');
+  if(isSafe){
+    kicker.textContent = '\u2713 Good \u2014 that\'s sorted';
+    line1.textContent = 'That matches the standard: ' + c.standard;
+    line2.textContent = c.tip;
+  } else {
+    kicker.textContent = '\u26A0 Worth fixing \u2014 here\'s why';
+    line1.textContent = c.why;
+    line2.textContent = c.how;
+  }
+  document.getElementById('revealSrc').textContent = c.src;
+}
+
+document.getElementById('chkNextBtn').addEventListener('click', ()=>{
+  if(state.idx < CHECKS.length-1){
+    state.idx++; saveState(); renderCheck(); show('screen-check');
+  } else {
+    document.getElementById('progressFill').style.width = '100%';
+    renderResult(); show('screen-result');
+  }
+});
+document.getElementById('chkBackBtn').addEventListener('click', ()=>{
+  if(state.idx>0){ state.idx--; saveState(); renderCheck(); show('screen-check'); }
+});
+
+document.getElementById('startBtn').addEventListener('click', ()=>{
+  state = { idx:0, answers:[], started:true, product:null }; saveState();
+  show('screen-choose');
+});
+document.getElementById('restartBtn').addEventListener('click', ()=>{
+  state = { idx:0, answers:[], started:true, product:null }; saveState();
+  show('screen-choose');
+});
+
+document.getElementById('saveResultsBtn').addEventListener('click', ()=>{
+  const p = PRODUCTS[state.product];
+  const safeItems = CHECKS.filter((c,i)=>state.answers[i]===true);
+  const flagItems = CHECKS.filter((c,i)=>state.answers[i]===false);
+  const dateStr = new Date().toLocaleDateString(undefined, {year:'numeric',month:'long',day:'numeric'});
+  const rowsFlag = flagItems.map(c=>'<div class="row flag"><strong>'+c.title.replace(/\?$/,'')+'</strong><span>'+c.how+'</span></div>').join('') || '<p style="color:#6B7A8D">Nothing flagged &mdash; every check today was already sorted.</p>';
+  const rowsSafe = safeItems.map(c=>'<div class="row safe"><strong>'+c.title.replace(/\?$/,'')+'</strong><span>'+c.tip+'</span></div>').join('') || '<p style="color:#6B7A8D">Nothing marked sorted yet.</p>';
+  const html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>My Results \u2014 '+dateStr+'</title>'
+    + '<style>body{font-family:-apple-system,Inter,sans-serif;background:#F9F6F0;color:#0D1B2A;max-width:640px;margin:0 auto;padding:32px 20px;line-height:1.6}'
+    + 'h1{font-family:Sora,sans-serif;font-size:1.5rem;margin:0 0 4px}p.sub{color:#6B7A8D;margin:0 0 26px;font-size:14px}'
+    + 'h2{font-size:1rem;text-transform:uppercase;letter-spacing:.05em;color:#6B7A8D;margin:26px 0 10px}'
+    + '.row{border-left:4px solid '+p.accent+';background:#fff;border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:10px}'
+    + '.row.safe{border-left-color:#15803D}.row.flag{border-left-color:#B45309}'
+    + '.row strong{display:block;font-size:14.5px;margin-bottom:3px}.row span{font-size:13.5px;color:#3A4A5C}'
+    + '.cta{display:inline-block;margin-top:22px;background:linear-gradient(135deg,'+p.accent+','+p.accentDark+');color:#fff;font-weight:700;padding:13px 20px;border-radius:10px;text-decoration:none}'
+    + 'footer{margin-top:30px;padding-top:16px;border-top:1px solid #EDE6D6;font-size:11.5px;color:#8194A7}</style></head><body>'
+    + '<h1>My ' + p.label + ' Safety Check</h1><p class="sub">Saved '+dateStr+' &middot; SafeLife by The Snag Tag</p>'
+    + '<h2>Check today</h2>' + rowsFlag
+    + '<h2>Already sorted</h2>' + rowsSafe
+    + '<a class="cta" href="'+p.gumroadUrl+'" target="_blank" rel="noopener">Get SafeLife '+p.label+' PRO &rarr;</a>'
+    + '<footer>This is educational general safety guidance from The Snag Tag, a NEBOSH &amp; OSHA trained HSE professional &mdash; not medical advice. Saved locally to your device; nothing was sent anywhere.</footer>'
+    + '</body></html>';
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'adult-safety-check-' + state.product + '-results.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 2000);
+});
+
+function renderResult(){
+  const p = PRODUCTS[state.product];
+  const total = CHECKS.length;
+  const safeCount = state.answers.filter(a=>a===true).length;
+  const flagCount = state.answers.filter(a=>a===false).length;
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statSafe').textContent = safeCount;
+  document.getElementById('statFlag').textContent = flagCount;
+
+  document.getElementById('resultHeadline').textContent =
+    flagCount === 0 ? total + ' for ' + total + ' \u2014 genuinely well done' :
+    flagCount <= 2 ? 'Close. A couple of things to sort today' :
+    'You just found real gaps';
+
+  const zones = {};
+  CHECKS.forEach((c,i)=>{
+    if(!zones[c.zone]) zones[c.zone] = {safe:0,total:0};
+    zones[c.zone].total++;
+    if(state.answers[i]===true) zones[c.zone].safe++;
+  });
+  const zb = document.getElementById('zoneBars');
+  zb.innerHTML = '';
+  Object.keys(zones).forEach(z=>{
+    const d = zones[z];
+    const pct = Math.round((d.safe/d.total)*100);
+    const row = document.createElement('div');
+    row.className = 'zbar-row';
+    row.innerHTML = '<div class="zbar-label">'+z+'</div><div class="zbar-track"><div class="zbar-fill'+(pct<100?' partial':'')+'" style="width:'+pct+'%"></div></div><div class="zbar-count">'+d.safe+'/'+d.total+'</div>';
+    zb.appendChild(row);
+  });
+
+  const flagWrap = document.getElementById('findingsFlag');
+  const safeWrap = document.getElementById('findingsSafe');
+  flagWrap.innerHTML = ''; safeWrap.innerHTML = '';
+  if(flagCount===0){
+    flagWrap.innerHTML = '<p style="font-size:14px;color:var(--ink-soft)">Nothing flagged today &mdash; see the sorted list below.</p>';
+  }
+  CHECKS.forEach((c,i)=>{
+    const isSafe = state.answers[i]===true;
+    const div = document.createElement('div');
+    div.className = 'finding ' + (isSafe?'safe':'flag');
+    div.innerHTML = '<div class="fic">'+(isSafe?'\u2713':'!')+'</div><div><div class="ft">'+c.title.replace(/\?$/,'')+'</div><div class="fd">'+(isSafe? 'Sorted \u2014 keep it that way.' : c.how)+'</div></div>';
+    (isSafe ? safeWrap : flagWrap).appendChild(div);
+  });
+
+  const behaviourFirst = BEHAVIOUR_FIRST[state.product] || [];
+  let qwIndex = behaviourFirst.find(i => state.answers[i]===false);
+  if(qwIndex === undefined) qwIndex = CHECKS.findIndex((c,i)=>state.answers[i]===false);
+  if(qwIndex === undefined || qwIndex === -1) qwIndex = 0;
+  const qw = CHECKS[qwIndex];
+  document.getElementById('qwTitle').textContent = qw.title.replace(/\?$/,'');
+  document.getElementById('qwBody').textContent = qw.how;
+
+  const bridgeBody = flagCount === 0
+    ? 'You\'re sorted on all ' + total + ' of today\'s highest-stakes checks for the ' + p.label + ' stage. SafeLife ' + p.label + ' PRO covers many more checks across every zone \u2014 the quieter risks that don\'t announce themselves until something goes wrong.'
+    : 'Today\'s check found ' + flagCount + ' of the highest-stakes gaps for the ' + p.label + ' stage \u2014 the ones that cause real harm, not the small stuff. SafeLife ' + p.label + ' PRO is the complete system built to close every gap like these, not just the ones you saw today.';
+  document.getElementById('bridgeBody').textContent = bridgeBody;
+
+  const stillItems = BRIDGE_STILL[state.product] || [];
+  document.getElementById('bridgeStillList').innerHTML = stillItems.map(li=>'<li>'+li+'</li>').join('');
+
+  document.getElementById('proBtn').href = p.gumroadUrl;
+  document.getElementById('proBtn').textContent = 'Get SafeLife ' + p.label + ' PRO \u2192';
+}
+
+function applyMode(m){
+  document.body.setAttribute('data-mode', m);
+  document.getElementById('modeToggle').textContent = m==='dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+  try{ localStorage.setItem(STORE_KEY+'-mode', m); }catch(e){}
+}
+document.getElementById('modeToggle').addEventListener('click', ()=>{
+  applyMode(document.body.getAttribute('data-mode')==='dark' ? 'light' : 'dark');
+});
+(function initMode(){
+  let m = 'light';
+  try{
+    m = localStorage.getItem(STORE_KEY+'-mode') ||
+        (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }catch(e){}
+  applyMode(m);
+})();
+
+loadState();
+if(state.product) applyProductTheme(state.product);
+if(state.started && state.product && state.idx < CHECKS.length && !(state.answers.length===CHECKS.length && state.answers.every(a=>a!==undefined))){
+  renderCheck(); show('screen-check');
+} else if(state.started && state.product && state.answers.length===CHECKS.length && state.answers.every(a=>a!==undefined && a!==null)){
+  renderResult(); show('screen-result');
+} else if(state.started && !state.product){
+  show('screen-choose');
+}
+</script>
+</body>
+</html>
