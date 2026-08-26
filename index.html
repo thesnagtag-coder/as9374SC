@@ -249,6 +249,7 @@ body[data-mode="dark"] .quickwin .qk{color:var(--accent)}
       </div>
     </div>
     <button class="nav-back" id="chkBackBtn" type="button">&larr; back</button>
+    <button class="nav-back" id="chkChooseBtn" type="button" style="opacity:.65">Choose a different check</button>
   </section>
 
   <section class="screen" id="screen-result">
@@ -758,6 +759,11 @@ document.getElementById('chkNextBtn').addEventListener('click', ()=>{
 });
 document.getElementById('chkBackBtn').addEventListener('click', ()=>{
   if(state.idx>0){ state.idx--; saveState(); renderCheck(); show('screen-check'); }
+});
+document.getElementById('chkChooseBtn').addEventListener('click', ()=>{
+  state = { idx:0, answers:[], started:true, product:null };
+  saveState();
+  show('screen-choose');
 });
 
 document.getElementById('startBtn').addEventListener('click', ()=>{
